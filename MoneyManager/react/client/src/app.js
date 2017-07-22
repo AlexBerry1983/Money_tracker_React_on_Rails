@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import HomeContainer from './containers/HomeContainer'
 
 window.addEventListener('load', function () {
   ReactDOM.render(
-    <h1>App Started</h1>,
+    <HomeContainer />,
     document.getElementById('app')
   );
 });
