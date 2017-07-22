@@ -1,10 +1,11 @@
 import React from 'React'
+import TransactionsList from '../components/TransactionsList'
 
 class TransactionsContainer extends React.Component{
 
   render(){
     return(
-      <div>TransactionsContainer</div>
+      <TransactionsList />
     )
   }
 
