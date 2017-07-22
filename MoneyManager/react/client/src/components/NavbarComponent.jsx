@@ -4,7 +4,10 @@ class NavbarComponent extends React.Component{
 
   render(){
     return(
-      <div>NavBar will go here</div>
+      <div>
+        <button>Transactions</button>
+        <button>Monthly Report</button>
+      </div>
     )
   }
 }
