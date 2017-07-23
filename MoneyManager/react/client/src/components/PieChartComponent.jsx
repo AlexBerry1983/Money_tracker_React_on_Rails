@@ -31,8 +31,9 @@ class PieChartComponent extends React.Component {
       ]
     }
     return(
-      <ReactHighcharts config = {config} domProps = {{id: 'chartId'}}></ReactHighcharts>
-
+      <div className = 'chart'>
+        <ReactHighcharts config = {config} domProps = {{id: 'chartId'}}></ReactHighcharts>
+      </div>
     )
   }
 }

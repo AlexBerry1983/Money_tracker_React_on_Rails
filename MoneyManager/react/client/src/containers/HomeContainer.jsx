@@ -11,7 +11,7 @@ class HomeContainer extends React.Component {
 
   render(){
     return(
-      <div>
+      <div className= 'homeContainer'>
         <PieChartComponent />
         <CalendarComponent />
         <NavbarComponent />
