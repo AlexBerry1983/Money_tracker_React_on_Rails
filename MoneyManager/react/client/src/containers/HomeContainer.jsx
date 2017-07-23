@@ -4,6 +4,8 @@ import CalendarComponent from '../components/CalendarComponent'
 import NavbarComponent from '../components/NavbarComponent'
 import TransactionsContainer from './TransactionsContainer'
 import ReactDOM from 'react-dom'
+import Calendar from 'rc-calendar';
+
 
 class HomeContainer extends React.Component {
 
@@ -12,7 +14,6 @@ class HomeContainer extends React.Component {
       <div>
         <PieChartComponent />
         <CalendarComponent />
-        <TransactionsContainer />
         <NavbarComponent />
       </div>
     )

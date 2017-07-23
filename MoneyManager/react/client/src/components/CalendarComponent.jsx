@@ -1,10 +1,13 @@
 import React from 'react'
+import Calendar from 'rc-calendar'
 
 class CalendarComponent extends React.Component {
 
   render(){
     return(
-      <div>Calendar will go here</div>
+      <div className='Calendar'>
+        <Calendar/>
+      </div>
     )
   }
 }

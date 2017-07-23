@@ -11,8 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.1",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
     "highcharts": "^5.0.12",
+    "rc-calendar": "^8.4.6",
     "react": "^15.6.1",
     "react-dom": "^15.4.2",
     "react-highcharts": "^12.0.0"
