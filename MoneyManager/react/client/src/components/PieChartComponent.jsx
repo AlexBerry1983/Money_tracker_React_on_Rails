@@ -4,18 +4,35 @@ const ReactHighcharts = require('react-highcharts');
 class PieChartComponent extends React.Component {
 
 
-  const config = {
-    chart: {
-      type: 'pie',
-      renderTo: container
-    }
-  }
-
-
 
   render(){
+    const config = {
+      chart: {
+        type: 'pie',
+        renderTo: PieChartComponent
+      },
+      title: {text: 'Monthly Breakdown'},
+      series: [
+        {
+          name: 'Expenses Breakdown',
+          data: [
+            {
+              name: 'Shopping',
+              y: 95,
+              color: "#73b7ff"
+            },
+            {
+              name: 'Entertainment',
+              y: 5,
+              color: "#00ba2f"
+            }
+          ]
+        }
+      ]
+    }
     return(
-      <div>{config}</div>
+      <ReactHighcharts config = {config} domProps = {{id: 'chartId'}}></ReactHighcharts>
+
     )
   }
 }
