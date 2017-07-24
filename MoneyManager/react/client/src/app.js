@@ -15,7 +15,7 @@ window.addEventListener('load', function () {
         <Route exact path='/' component={HomeContainer}/>
         <Route path='/transactions' component={TransactionsContainer}/>
         <Route path='/newForm' component={NewTransactionForm}/>
-        <Route path='/categories' component={CategoriesHome}/>
+        <Route path='/categoriesHome' component={CategoriesHome}/>
       </div>
     </HashRouter>,
     document.getElementById('app')
