@@ -12,9 +12,15 @@ class NewTransactionForm extends React.Component {
   }
 
   handleNameChange(event){
-    console.log(event.target.value);
     this.setState({
       TransactionName: event.target.value
+    })
+  }
+
+  handleAmountChange(event){
+    console.log(event.target.value);
+    this.setState({
+      TransactionAmount: event.target.value
     })
   }
 
@@ -23,8 +29,8 @@ class NewTransactionForm extends React.Component {
       <div id="NewTransactionForm">
         <form>
           <input type='text' placeholder='transaction name' onChange={this.handleNameChange.bind(this)}/>
-          <input type='text' placeholder='transaction amount'/>
-          <input type='text' placeholder='date: yyyy/mm/dd'/>
+          <input type='text' placeholder='transaction amount' onChange={this.handleAmountChange.bind(this)}/>
+          <input type='text' placeholder='date: yyyy/mm/dd' />
           <button onClick={this.createNewTransaction}>Confirm</button>
         </form>
       </div>
