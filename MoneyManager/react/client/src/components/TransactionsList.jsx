@@ -1,5 +1,6 @@
-import React from 'react'
-import TransactionItem from './TransactionItem'
+import React from 'react';
+import TransactionItem from './TransactionItem';
+import ReactDOM from 'react-dom';
 
 class TransactionsList extends React.Component{
 
@@ -23,10 +24,11 @@ class TransactionsList extends React.Component{
     this.props.refresh()
   }
 
+
   render(){
     const transactionArray = this.props.transactionInfo.map((transaction, index) => {
       return (
-        <div key={index}>
+        <div id="TransList" key={index}>
           <TransactionItem name={transaction.name} amount={transaction.amount}/>
           <button onClick={() => {this.nukeTheItem(transaction.id)}}>delete</button>
         </div>
@@ -43,5 +45,5 @@ class TransactionsList extends React.Component{
 
 
 }
-
+//
 export default TransactionsList

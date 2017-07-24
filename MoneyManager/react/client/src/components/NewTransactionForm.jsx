@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 class NewTransactionForm extends React.Component {
 
@@ -39,6 +40,8 @@ class NewTransactionForm extends React.Component {
           <input name="date" type='text' placeholder='date: yyyy/mm/dd'/>
           <button onClick={this.createNewTransaction.bind(this)}>Confirm</button>
         </form>
+        <button><Link to='/transactions'>Transactions</Link></button>
+        <button><Link to='/'>Home</Link></button>
       </div>
     )
   }
