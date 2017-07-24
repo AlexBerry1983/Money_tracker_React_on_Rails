@@ -7,7 +7,7 @@ class NavbarComponent extends React.Component{
     return(
       <div className='Nav'>
         <button><Link to='/transactions'>Transactions</Link></button>
-        <button>Monthly Report</button>
+        <button><Link to='/CategoriesHome'>Spending Categories</Link></button>
       </div>
     )
   }
