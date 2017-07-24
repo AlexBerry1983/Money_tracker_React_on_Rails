@@ -11,32 +11,33 @@ class NewTransactionForm extends React.Component {
     }
   }
 
-  handleNameChange(event){
-    this.setState({
-      TransactionName: event.target.value
-    })
-  }
-
-  handleAmountChange(event){
-    this.setState({
-      TransactionAmount: event.target.value
-    })
-  }
-
-  handleDateChange(event){
-    this.setState({
-      TransactionDate: event.target.value
-    })
+  createNewTransaction(event){
+    event.preventDefault()
+    const {form} = this.refs
+    let formInfo = {
+      transaction: {
+        name: form.name.value,
+        amount: form.amount.value,
+        date: form.date.value
+      }
+    }
+    console.log(formInfo);
+    formInfo = JSON.stringify(formInfo)
+    const url = 'http://localhost:5000/transactions'
+    const request = new XMLHttpRequest()
+    request.open('POST', url)
+    request.setRequestHeader('Content-Type', 'application/json')
+    request.send(formInfo)
   }
 
   render(){
     return(
       <div id="NewTransactionForm">
-        <form>
-          <input type='text' placeholder='transaction name' onChange={this.handleNameChange.bind(this)}/>
-          <input type='text' placeholder='transaction amount' onChange={this.handleAmountChange.bind(this)}/>
-          <input type='text' placeholder='date: yyyy/mm/dd' onChange={this.handleDateChange.bind(this)}/>
-          <button onClick={this.createNewTransaction}>Confirm</button>
+        <form ref="form">
+          <input name="name" type='text' placeholder='transaction name'/>
+          <input name="amount" type='text' placeholder='transaction amount'/>
+          <input name="date" type='text' placeholder='date: yyyy/mm/dd'/>
+          <button onClick={this.createNewTransaction.bind(this)}>Confirm</button>
         </form>
       </div>
     )
