@@ -25,7 +25,10 @@ class TransactionsContainer extends React.Component{
 
   render(){
     return(
-      <TransactionsList transactionInfo={this.state.transactions}/>
+      <div>
+        <h1>Transactions Summary</h1>
+        <TransactionsList transactionInfo={this.state.transactions}/>
+      </div>
     )
   }
 }

@@ -10,7 +10,6 @@ window.addEventListener('load', function () {
   ReactDOM.render(
     <HashRouter>
       <div>
-        {/* <Route path='/' component={HomeContainer}/> */}
         <Route exact path='/' component={HomeContainer}/>
         <Route path='/transactions' component={TransactionsContainer} />
       </div>
