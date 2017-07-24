@@ -1,10 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HomeContainer from './containers/HomeContainer'
+import HomeContainer from './containers/HomeContainer';
+import TransactionsContainer from './containers/TransactionsContainer';
+import { HashRouter, Route } from 'react-router-dom';
+import { render } from 'react-dom';
+
 
 window.addEventListener('load', function () {
   ReactDOM.render(
-    <HomeContainer />,
+    <HashRouter>
+      <div>
+        {/* <Route path='/' component={HomeContainer}/> */}
+        <Route exact path='/' component={HomeContainer}/>
+        <Route path='/transactions' component={TransactionsContainer} />
+      </div>
+    </HashRouter>,
     document.getElementById('app')
   );
 });
