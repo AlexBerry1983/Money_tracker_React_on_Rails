@@ -11,6 +11,10 @@ class TransactionsContainer extends React.Component{
     }
   }
 
+  refreshState(){
+    window.location.reload();
+  }
+
   componentDidMount(){
     const url = 'http://localhost:5000/transactions'
     const request = new XMLHttpRequest()
@@ -28,7 +32,7 @@ class TransactionsContainer extends React.Component{
     return(
       <div>
         <h1>Transactions Summary</h1>
-        <TransactionsList transactionInfo={this.state.transactions}/>
+        <TransactionsList transactionInfo={this.state.transactions} refresh={this.refreshState.bind(this)}/>
         <button><Link to='/newForm'>Add a new Transaction</Link></button>
       </div>
     )

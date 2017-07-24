@@ -12,12 +12,25 @@ class TransactionsList extends React.Component{
     array.forEach(function(object){
       totalSpent += Number(object.amount)
     })
-    return totalSpent
+    return parseFloat(totalSpent.toFixed(3))
+  }
+
+  nukeTheItem(transactionId){
+    const url = 'http://localhost:5000/transactions/' + transactionId
+    const request = new XMLHttpRequest()
+    request.open('DELETE', url)
+    request.send()
+    this.props.refresh()
   }
 
   render(){
     const transactionArray = this.props.transactionInfo.map((transaction, index) => {
-      return <TransactionItem key={index} name={transaction.name} amount={transaction.amount}/>
+      return (
+        <div key={index}>
+          <TransactionItem name={transaction.name} amount={transaction.amount}/>
+          <button onClick={() => {this.nukeTheItem(transaction.id)}}>delete</button>
+        </div>
+      )
     })
 
     return(
