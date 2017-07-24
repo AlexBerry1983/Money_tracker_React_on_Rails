@@ -1,5 +1,6 @@
-import React from 'React'
-import TransactionsList from '../components/TransactionsList'
+import React from 'React';
+import TransactionsList from '../components/TransactionsList';
+import {Link} from 'react-router-dom';
 
 class TransactionsContainer extends React.Component{
 
@@ -28,7 +29,7 @@ class TransactionsContainer extends React.Component{
       <div>
         <h1>Transactions Summary</h1>
         <TransactionsList transactionInfo={this.state.transactions}/>
-        <button>Add a new Transaction</button>
+        <button><Link to='/newForm'>Add a new Transaction</Link></button>
       </div>
     )
   }
