@@ -28,6 +28,7 @@ class TransactionsContainer extends React.Component{
       <div>
         <h1>Transactions Summary</h1>
         <TransactionsList transactionInfo={this.state.transactions}/>
+        <button>Add a new Transaction</button>
       </div>
     )
   }

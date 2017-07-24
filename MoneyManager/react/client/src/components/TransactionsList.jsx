@@ -12,7 +12,6 @@ class TransactionsList extends React.Component{
     array.forEach(function(object){
       totalSpent += Number(object.amount)
     })
-    console.log(totalSpent);
     return totalSpent
   }
 
@@ -20,7 +19,6 @@ class TransactionsList extends React.Component{
     const transactionArray = this.props.transactionInfo.map((transaction, index) => {
       return <TransactionItem key={index} name={transaction.name} amount={transaction.amount}/>
     })
-
 
     return(
       <div>
