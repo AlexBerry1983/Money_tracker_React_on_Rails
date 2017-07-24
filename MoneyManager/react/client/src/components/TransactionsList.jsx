@@ -1,6 +1,6 @@
 import React from 'react';
 import TransactionItem from './TransactionItem';
-import ReactDOM from 'react-dom';
+import {Link} from 'react-router-dom';
 
 class TransactionsList extends React.Component{
 
