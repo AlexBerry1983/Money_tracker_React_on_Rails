@@ -11,9 +11,13 @@ class CategoriesHome extends React.Component{
     }
   }
 
+  refreshCatList(){
+    window.location.reload()
+  }
+
   componentDidMount(){
     const url = 'http://localhost:5000/categories'
-    const request = new XMLHttpRequest()
+    const request = new XMLHttpRequest();
     request.open('GET', url)
     request.onload = () => {
       const jsonString = request.responseText
@@ -26,7 +30,7 @@ class CategoriesHome extends React.Component{
   render(){
     return(
       <div>
-        <CategoriesList categoriesArray={this.state.categories}/>
+        <CategoriesList categoriesArray={this.state.categories} refreshPage={this.refreshCatList.bind(this)}/>
         <button>Make New Category</button>
         <button><Link to='/'>Home</Link></button>
         <button><Link to='/transactions'>Transactions</Link></button>
