@@ -36,7 +36,7 @@ class NewTransactionForm extends React.Component {
         <form ref="form">
           <input name="name" type='text' placeholder='transaction name'/>
           <input name="amount" type='text' placeholder='transaction amount'/>
-          <input name="date" type='text' placeholder='date: yyyy/mm/dd'/>
+          <input name="date" type='date' placeholder='date: yyyy/mm/dd'/>
           <button onClick={this.createNewTransaction.bind(this)}>Confirm</button>
         </form>
         <button><Link to='/transactions'>Transactions</Link></button>
