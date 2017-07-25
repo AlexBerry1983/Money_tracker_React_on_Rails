@@ -7,7 +7,8 @@ class CategoriesList extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      updateForm: null
+      updateForm: null,
+      newCateForm: false
     }
   }
 
@@ -35,6 +36,22 @@ class CategoriesList extends React.Component{
     this.props.refreshPage()
   }
 
+  createNewCategory(){
+    event.preventDefault()
+    const {form} = this.refs
+    let catFormInfo = {
+      category:{
+        name: form.name.value
+      }
+    }
+    catFormInfo = JSON.stringify(catFormInfo)
+    const url = 'http://localhost:5000/categories/'
+    const request = new XMLHttpRequest();
+    request.open('POST', url)
+    request.setRequestHeader('Content-Type', 'application/json')
+    request.send(catFormInfo)
+  }
+
   render(){
     const catArray = this.props.categoriesArray.map((category, index) => {
       let updateForm = null
@@ -56,9 +73,20 @@ class CategoriesList extends React.Component{
         </div>
       )
     })
+    let newCateForm = false
+    if (this.state.newCateForm === true)
+      newCateForm =
+      <div id='NewCatForm'>
+        <form ref='form'>
+          <input name='name' type='text' placeholder='category name'/>
+          <button onClick={this.createNewCategory.bind(this)}>Submit</button>
+        </form>
+      </div>
     return(
       <div>
         {catArray}
+        <button onClick={() => {this.setState({newCateForm: true})}}>Add New Category</button>
+        {newCateForm}
       </div>
     )
   }

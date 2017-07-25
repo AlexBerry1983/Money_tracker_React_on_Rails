@@ -33,7 +33,6 @@ class TransactionsContainer extends React.Component{
       <div>
         <h1>Transactions Summary</h1>
         <TransactionsList transactionInfo={this.state.transactions} refresh={this.refreshState.bind(this)}/>
-        <button><Link to='/newForm'>Add a new Transaction</Link></button>
         <button><Link to='/'>Home</Link></button>
       </div>
     )

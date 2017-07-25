@@ -7,7 +7,8 @@ class TransactionsList extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      updateTransForm: null
+      updateTransForm: null,
+      showNewTranForm: false
     }
   }
 
@@ -44,6 +45,23 @@ class TransactionsList extends React.Component{
     this.props.refreshState()
   }
 
+  createNewTransaction(event){
+    event.preventDefault()
+    let formInfo = {
+      transaction: {
+        name: this.newForm.name.value,
+        amount: this.newForm.amount.value,
+        date: this.newForm.date.value
+      }
+    }
+    formInfo = JSON.stringify(formInfo)
+    const url = 'http://localhost:5000/transactions'
+    const request = new XMLHttpRequest()
+    request.open('POST', url)
+    request.setRequestHeader('Content-Type', 'application/json')
+    request.send(formInfo)
+    this.props.refresh()
+  }
 
   render(){
     const transactionArray = this.props.transactionInfo.map((transaction, index) => {
@@ -68,16 +86,31 @@ class TransactionsList extends React.Component{
         </div>
       )
     })
-
+    let showNewTranForm = null
+      if (this.state.showNewTranForm === true){
+      showNewTranForm =
+        <div id="NewTransactionForm">
+          <form ref={(newTform) => this.newForm = newTform}>
+            <input name="name" type='text' placeholder='transaction name'/>
+            <input name="amount" type='text' placeholder='transaction amount'/>
+            <input name="date" type='date' placeholder='date: yyyy/mm/dd'/>
+            <button onClick={this.createNewTransaction.bind(this)}>Confirm</button>
+          </form>
+          <button><Link to='/transactions'>Transactions</Link></button>
+          <button><Link to='/'>Home</Link></button>
+        </div>
+    }
     return(
       <div>
         {transactionArray}
         Total spent: {this.calculateTotal(this.props.transactionInfo)}
+        {showNewTranForm}
+        <button onClick={() => {this.setState({showNewTranForm: true})}}>Add a New Transaction</button>
       </div>
     )
   }
 
 
 }
-//
+
 export default TransactionsList

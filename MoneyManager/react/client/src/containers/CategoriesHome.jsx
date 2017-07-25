@@ -31,7 +31,6 @@ class CategoriesHome extends React.Component{
     return(
       <div>
         <CategoriesList categoriesArray={this.state.categories} refreshPage={this.refreshCatList.bind(this)}/>
-        <button><Link to='/categoriesHome/new'>Add New Category</Link></button>
         <button><Link to='/'>Home</Link></button>
         <button><Link to='/transactions'>Transactions</Link></button>
       </div>
