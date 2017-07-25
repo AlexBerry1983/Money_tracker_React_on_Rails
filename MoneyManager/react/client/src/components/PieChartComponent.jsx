@@ -3,12 +3,25 @@ const ReactHighcharts = require('react-highcharts');
 
 class PieChartComponent extends React.Component {
 
-  //need to associate transactions with category so can get total spent by category
-  //once have total spent need to calculate percentage for each catgory for pie chart
-  //need to dynamically generate data array with categories and percentages populate
+  constructor(props){
+    super(props)
+  }
 
+  pasteTableData(){
+    let categoriesArray = []
+    this.props.categoryArray.forEach(function(category) {
+      console.log(category);
+      categoriesArray.push({
+        name: category.name,
+        y: category.name.length,
+      })
+    })
+    return categoriesArray
+  }
 
   render(){
+
+
     const config = {
       chart: {
         type: 'pie',
@@ -18,22 +31,11 @@ class PieChartComponent extends React.Component {
       series: [
         {
           name: 'Expenses Breakdown',
-          data: [
-            {
-              name: 'Shopping',
-              y: 95,
-              color: "#73b7ff"
-            },
-            {
-              name: 'Entertainment',
-              y: 5,
-              color: "#00ba2f"
-            }
-          ]
+          data:  this.pasteTableData()
         }
       ]
     }
-    
+
     return(
       <div className = 'chart'>
         <ReactHighcharts config = {config} domProps = {{id: 'chartId'}}></ReactHighcharts>

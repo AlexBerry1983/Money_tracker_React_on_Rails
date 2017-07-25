@@ -7,7 +7,8 @@ class TransactionsContainer extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      transactions: []
+      transactions: [],
+      categories: []
     }
   }
 
@@ -32,7 +33,7 @@ class TransactionsContainer extends React.Component{
     return(
       <div>
         <h1>Transactions Summary</h1>
-        <TransactionsList transactionInfo={this.state.transactions} refresh={this.refreshState.bind(this)}/>
+        <TransactionsList transactionInfo={this.state.transactions} refresh={this.refreshState.bind(this)} cats={this.state.categories}/>
         <button><Link to='/'>Home</Link></button>
       </div>
     )
