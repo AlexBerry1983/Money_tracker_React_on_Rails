@@ -27,6 +27,8 @@ class TransactionsList extends React.Component{
 
   render(){
     const transactionArray = this.props.transactionInfo.map((transaction, index) => {
+      let updateTransForm = null
+      if (this.state.updateTransForm === transaction.id)
       return (
         <div id="TransList" key={index}>
           <TransactionItem name={transaction.name} amount={transaction.amount}/>

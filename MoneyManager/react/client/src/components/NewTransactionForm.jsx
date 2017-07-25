@@ -22,7 +22,6 @@ class NewTransactionForm extends React.Component {
         date: form.date.value
       }
     }
-    console.log(formInfo);
     formInfo = JSON.stringify(formInfo)
     const url = 'http://localhost:5000/transactions'
     const request = new XMLHttpRequest()

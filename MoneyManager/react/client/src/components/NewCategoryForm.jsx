@@ -3,8 +3,6 @@ import {Link} from 'react-router-dom';
 
 class NewCategoryForm extends React.Component{
 
-
-
   createNewCategory(){
     event.preventDefault()
     const {form} = this.refs
@@ -13,7 +11,6 @@ class NewCategoryForm extends React.Component{
         name: form.name.value
       }
     }
-    console.log(catFormInfo);
     catFormInfo = JSON.stringify(catFormInfo)
     const url = 'http://localhost:5000/categories/'
     const request = new XMLHttpRequest();
