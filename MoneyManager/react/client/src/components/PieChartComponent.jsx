@@ -10,24 +10,33 @@ class PieChartComponent extends React.Component {
   pasteTableData(){
     let categoriesArray = []
     this.props.categoryArray.forEach(function(category) {
-      console.log(category);
       categoriesArray.push({
         name: category.name,
-        y: category.name.length,
+        y: this.getCategoryAmount(category),
       })
-    })
+    }.bind(this))
     return categoriesArray
   }
 
+  getCategoryAmount(category){
+    let totalValue = 0
+    category.transactions.forEach(function(transactionObject){
+      totalValue += Number(transactionObject.amount)
+    })
+    return totalValue
+  }
+
+
   render(){
-
-
     const config = {
       chart: {
         type: 'pie',
         renderTo: PieChartComponent
       },
       title: {text: 'Monthly Breakdown'},
+      tooltip: {
+        pointFormat: `Expenses Breakdown: £{point.y:.2f}`
+      },
       series: [
         {
           name: 'Expenses Breakdown',

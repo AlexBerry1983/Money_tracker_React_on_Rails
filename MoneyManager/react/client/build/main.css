@@ -1,12 +1,28 @@
+body {
+  background-image: url(http://cdn.pymnts.com/wp-content/uploads/2015/12/moneymanager.jpg);
+  background-size: cover;
+  color: white;
+}
+
 .homeContainers {
-  
+
+}
+
+.newTransactionButton {
+  margin-left: 100px
 }
 
 .Calendar {
-  height: 200px;
-  width: 200px;
+  height: 400px;
+  width: 400px;
   float: right;
   display: inline-block;
+  transform: rotate(-38.5deg);
+  margin-top: 275px;
+  margin-left: 150px;
+  padding-top: 100px;
+  padding-left: 120px;
+  padding-right: 125px;
 }
 
 .chart {
@@ -15,6 +31,7 @@
   float: left;
   display: inline-block;
   align-items: center;
+  background-color: none;
 }
 
 .Nav {

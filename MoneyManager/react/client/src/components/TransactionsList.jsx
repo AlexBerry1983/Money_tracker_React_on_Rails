@@ -34,7 +34,8 @@ class TransactionsList extends React.Component{
       transaction:{
         name: this.formRef.UpdateTransName.value,
         amount: this.formRef.UpdateTransAmount.value,
-        date: this.formRef.UpdateTransDate.value
+        date: this.formRef.UpdateTransDate.value,
+        category_id: this.formRef.UpdateTransCategory.value
       }
     }
     const jsonString = JSON.stringify(updatedTransInfo);
@@ -53,8 +54,10 @@ class TransactionsList extends React.Component{
         name: this.newForm.name.value,
         amount: this.newForm.amount.value,
         date: this.newForm.date.value,
+        category_id: this.newForm.newCategorySelect.value
       }
     }
+    console.log(this.newForm.newCategorySelect.value);
     formInfo = JSON.stringify(formInfo)
     const url = 'http://localhost:5000/transactions'
     const request = new XMLHttpRequest()
@@ -80,19 +83,18 @@ class TransactionsList extends React.Component{
 
   render(){
     const dropdownItems = this.state.categories.map((category, index) => {
-      return <option key={index}>{category.name}</option>
+      return <option key={index} value={category.id}>{category.name}</option>
     })
     const transactionArray = this.props.transactionInfo.map((transaction, index) => {
-      console.log(transaction.category);
       let updateTransForm = null
       if (this.state.updateTransForm === transaction.id){
         updateTransForm =
         <div id='updateTransactionForm'>
           <form ref={(reference) => this.formRef = reference}>
-            <input name='UpdateTransName' type='text' placeholder='update transaction name'/>
-            <input name='UpdateTransAmount' type='text' placeholder='update transaction amount'/>
-            <input name='UpdateTransDate' type='date' placeholder='update transaction date: yyyy/mm/dd'/>
-            <select>{dropdownItems}</select>
+            <input name='UpdateTransName' type='text' placeholder='update transaction name'></input>
+            <input name='UpdateTransAmount' type='text' placeholder='update transaction amount'></input>
+            <input name='UpdateTransDate' type='date' placeholder='update transaction date: yyyy/mm/dd'></input>
+            <select name='UpdateTransCategory'>{dropdownItems}</select>
             <button onClick={() => {this.updateTransactions(transaction.id)}}>Update</button>
           </form>
         </div>
@@ -101,13 +103,13 @@ class TransactionsList extends React.Component{
         <div id="TransList" key={index}>
           <TransactionItem name={transaction.name} amount={transaction.amount} date={transaction.date} cat={transaction.category.name}/>
           <button onClick={() => {this.nukeTheItem(transaction.id)}}>Delete</button>
-          <button onClick={() => {this.setState({updateTransForm: transaction.id})}}>Update</button>
+          <button id='newTransactionButton' onClick={() => {this.setState({updateTransForm: transaction.id})}}>Update</button>
           {updateTransForm}
         </div>
       )
     })
     const newDropDownItems = this.state.categories.map((category, index) => {
-      return <option key={index}>{category.name}</option>
+      return <option key={index} value={category.id}>{category.name}</option>
     })
     let showNewTranForm = null
       if (this.state.showNewTranForm === true){
@@ -117,7 +119,7 @@ class TransactionsList extends React.Component{
             <input name="name" type='text' placeholder='transaction name'/>
             <input name="amount" type='text' placeholder='transaction amount'/>
             <input name="date" type='date' placeholder='date: yyyy/mm/dd'/>
-            <select>{newDropDownItems}</select>
+            <select name="newCategorySelect">{newDropDownItems}</select>
             <button onClick={this.createNewTransaction.bind(this)}>Confirm</button>
           </form>
           <button><Link to='/transactions'>Transactions</Link></button>
