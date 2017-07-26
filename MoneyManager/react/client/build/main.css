@@ -1,11 +1,14 @@
 body {
   background-image: url(http://cdn.pymnts.com/wp-content/uploads/2015/12/moneymanager.jpg);
   background-size: cover;
+  height: 90%;
   color: white;
 }
 
-.homeContainers {
+.homeContainer {
+  display: flex;
 
+  flex-wrap: wrap;
 }
 
 .newTransactionButton {
@@ -13,31 +16,50 @@ body {
 }
 
 .Calendar {
-  height: 400px;
-  width: 400px;
-  float: right;
-  display: inline-block;
-  transform: rotate(-38.5deg);
-  margin-top: 275px;
-  margin-left: 150px;
-  padding-top: 100px;
-  padding-left: 120px;
-  padding-right: 125px;
+  width: 20%;
+  color: black;
+  padding-top: 30px;
+  padding-right: 100px;
 }
-
+.rc-calendar{
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 0 20px white;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 20px;
+  padding-left: 30px;
+}
 .chart {
-  height: 400px;
-  width: 400px;
-  float: left;
-  display: inline-block;
-  align-items: center;
-  background-color: none;
+  width: 40%;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding-right: 200px;
+  padding-bottom: 100px;
+}
+.highcharts-background{
+
+}
+.Nav {
+  padding-left: 300px
 }
 
-.Nav {
-  clear: both;
-  display: block;
-  align-items: center;
-  width: 300px;
-  margin-left: 40%;
+.Nav button {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.Nav a {
+  font-size: 15px;
+  text-decoration: none;
+}
+
+a:visited{
+  color:black;
+}
+
+.Nav button:hover{
+  background-color: rgb(124, 181, 236);
+  cursor: pointer;
 }

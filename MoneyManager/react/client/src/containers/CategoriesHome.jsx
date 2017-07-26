@@ -11,11 +11,37 @@ class CategoriesHome extends React.Component{
     }
   }
 
-  refreshCatList(){
-    window.location.reload()
+  deleteCategory(catId){
+    const url = 'http://localhost:5000/categories/' + catId
+    const request = new XMLHttpRequest();
+    request.open('DELETE', url)
+    request.onload = () => {
+      this.getCategories()
+    }
+    request.send()
+  }
+  // refreshCatList(){
+  //   window.location.reload()
+  // }
+
+  createNewCategory(formInfo){
+    let catFormInfo = {
+      category:{
+        name: formInfo
+      }
+    }
+    catFormInfo = JSON.stringify(catFormInfo)
+    const url = 'http://localhost:5000/categories/'
+    const request = new XMLHttpRequest();
+    request.open('POST', url)
+    request.setRequestHeader('Content-Type', 'application/json')
+    request.onload = () => {
+      this.componentDidMount()
+    }
+    request.send(catFormInfo)
   }
 
-  componentDidMount(){
+  getCategories(){
     const url = 'http://localhost:5000/categories'
     const request = new XMLHttpRequest();
     request.open('GET', url)
@@ -27,10 +53,19 @@ class CategoriesHome extends React.Component{
     request.send()
   }
 
+  componentDidMount(){
+    this.getCategories()
+  }
+
   render(){
     return(
       <div>
-        <CategoriesList categoriesArray={this.state.categories} refreshPage={this.refreshCatList.bind(this)}/>
+        <CategoriesList
+          categoriesArray={this.state.categories}
+          // refreshPage={this.refreshCatList.bind(this)}
+          deleteCategory={this.deleteCategory.bind(this)}
+          makeNewCategory={this.createNewCategory.bind(this)}
+        />
         <button><Link to='/'>Home</Link></button>
         <button><Link to='/transactions'>Transactions</Link></button>
       </div>

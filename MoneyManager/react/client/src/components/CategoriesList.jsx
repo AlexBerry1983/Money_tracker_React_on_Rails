@@ -8,8 +8,15 @@ class CategoriesList extends React.Component{
     super(props)
     this.state = {
       updateForm: null,
-      newCateForm: false
+      newCateForm: false,
+      newFormInfo: ""
     }
+  }
+
+  handleOnChange(event){
+    this.setState({
+      newFormInfo: event.target.value
+    })
   }
 
   updateCategory(catId){
@@ -28,28 +35,13 @@ class CategoriesList extends React.Component{
     this.props.refreshPage()
   }
 
-  deleteCategory(catId){
-    const url = 'http://localhost:5000/categories/' + catId
-    const request = new XMLHttpRequest();
-    request.open('DELETE', url)
-    request.send()
-    this.props.refreshPage()
+  onMakeNewCategory(event){
+    event.preventDefault()
+    this.props.makeNewCategory(this.state.newFormInfo)
   }
 
-  createNewCategory(){
-    event.preventDefault()
-    const {form} = this.refs
-    let catFormInfo = {
-      category:{
-        name: form.name.value
-      }
-    }
-    catFormInfo = JSON.stringify(catFormInfo)
-    const url = 'http://localhost:5000/categories/'
-    const request = new XMLHttpRequest();
-    request.open('POST', url)
-    request.setRequestHeader('Content-Type', 'application/json')
-    request.send(catFormInfo)
+  onDeleteCategory(id){
+    this.props.deleteCategory(id)
   }
 
   render(){
@@ -67,7 +59,7 @@ class CategoriesList extends React.Component{
       return (
         <div id='categoryItem' key={index}>
           <CategoryItem categoryName={category.name}></CategoryItem>
-          <button onClick={() => {this.deleteCategory(category.id)}}>Delete</button>
+          <button onClick={() => {this.onDeleteCategory(category.id)}}>Delete</button>
           <button onClick={() => {this.setState({updateForm: category.id})}}>Update</button>
           {updateForm}
         </div>
@@ -77,9 +69,9 @@ class CategoriesList extends React.Component{
     if (this.state.newCateForm === true)
       newCateForm =
       <div id='NewCatForm'>
-        <form ref='form'>
-          <input name='name' type='text' placeholder='category name'/>
-          <button onClick={this.createNewCategory.bind(this)}>Submit</button>
+        <form onSubmit={(event) => {this.onMakeNewCategory(event)}}>
+          <input name='name' type='text' placeholder='category name' value={this.state.newFormInfo} onChange={(event) => this.handleOnChange(event)}/>
+          <button>Submit</button>
         </form>
       </div>
     return(

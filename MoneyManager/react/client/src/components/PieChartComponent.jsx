@@ -31,9 +31,24 @@ class PieChartComponent extends React.Component {
     const config = {
       chart: {
         type: 'pie',
-        renderTo: PieChartComponent
+        renderTo: PieChartComponent,
+        backgroundColor: 'transparent',
       },
-      title: {text: 'Monthly Breakdown'},
+      plotOptions:{
+        pie:{
+          dataLabels:{
+            enabled: true,
+            color: '#ffffff',
+            style: {fontFamily: 'fantasy', fontSize: '1.5em'}
+          }
+        }
+      },
+      title: {text: 'Monthly Breakdown',
+    style:{
+      color:'#ffffff',
+      fontFamily: 'fantasy',
+      fontSize: '2.5em'
+    }},
       tooltip: {
         pointFormat: `Expenses Breakdown: £{point.y:.2f}`
       },
