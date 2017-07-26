@@ -9,7 +9,8 @@ class CategoriesList extends React.Component{
     this.state = {
       updateForm: null,
       newCateForm: false,
-      newFormInfo: ""
+      newFormInfo: "",
+      updateFormInfo: ""
     }
   }
 
@@ -19,20 +20,15 @@ class CategoriesList extends React.Component{
     })
   }
 
-  updateCategory(catId){
-    const UpdatedCatInfo = {
-      category:{
-        name: this.formRef.updateCatName.value
-      }
-    }
-    console.log(UpdatedCatInfo);
-    const jsonString = JSON.stringify(UpdatedCatInfo)
-    const url = 'http://localhost:5000/categories/' + catId
-    const request = new XMLHttpRequest();
-    request.open('PUT', url)
-    request.setRequestHeader('Content-type', 'Application/json')
-    request.send(jsonString)
-    this.props.refreshPage()
+  handleUpdateOnChange(event){
+    this.setState({
+      updateFormInfo: event.target.value
+    })
+  }
+
+
+  onUpdateCategory(catId){
+    this.props.updateTheCategory(catId, this.state.updateFormInfo)
   }
 
   onMakeNewCategory(event){
@@ -50,9 +46,9 @@ class CategoriesList extends React.Component{
       if (this.state.updateForm === category.id){
         updateForm =
         <div id='catUpdateForm'>
-          <form ref={(reference) => this.formRef = reference}>
-            <input name='updateCatName' type='text' placeholder='update category name' defaultValue={category.name}/>
-            <button onClick={() => {this.updateCategory(category.id)}}>Update</button>
+          <form onSubmit={() => {this.onUpdateCategory(category.id)}}>
+            <input name='updateCatName' type='text' placeholder='update category name' value={this.state.updateFormInfo} onChange={(event) => this.handleUpdateOnChange(event)}/>
+            <button>Update</button>
           </form>
         </div>
       }

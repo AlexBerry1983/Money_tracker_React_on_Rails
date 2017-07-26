@@ -20,9 +20,6 @@ class CategoriesHome extends React.Component{
     }
     request.send()
   }
-  // refreshCatList(){
-  //   window.location.reload()
-  // }
 
   createNewCategory(formInfo){
     let catFormInfo = {
@@ -39,6 +36,24 @@ class CategoriesHome extends React.Component{
       this.componentDidMount()
     }
     request.send(catFormInfo)
+  }
+
+  updateCategory(catId, updateFormInfo){
+    const UpdatedCatInfo = {
+      category:{
+        name: updateFormInfo
+      }
+    }
+    console.log(UpdatedCatInfo);
+    const jsonString = JSON.stringify(UpdatedCatInfo)
+    const url = 'http://localhost:5000/categories/' + catId
+    const request = new XMLHttpRequest();
+    request.open('PUT', url)
+    request.setRequestHeader('Content-type', 'Application/json')
+    request.onload = () => {
+      this.componentDidMount()
+    }
+    request.send(jsonString)
   }
 
   getCategories(){
@@ -65,6 +80,7 @@ class CategoriesHome extends React.Component{
           // refreshPage={this.refreshCatList.bind(this)}
           deleteCategory={this.deleteCategory.bind(this)}
           makeNewCategory={this.createNewCategory.bind(this)}
+          updateTheCategory={this.updateCategory.bind(this)}
         />
         <button><Link to='/'>Home</Link></button>
         <button><Link to='/transactions'>Transactions</Link></button>
