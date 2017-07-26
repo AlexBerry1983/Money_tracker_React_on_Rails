@@ -91,10 +91,10 @@ class TransactionsList extends React.Component{
         updateTransForm =
         <div id='updateTransactionForm'>
           <form ref={(reference) => this.formRef = reference}>
-            <input name='UpdateTransName' type='text' placeholder='update transaction name'></input>
-            <input name='UpdateTransAmount' type='text' placeholder='update transaction amount'></input>
-            <input name='UpdateTransDate' type='date' placeholder='update transaction date: yyyy/mm/dd'></input>
-            <select name='UpdateTransCategory'>{dropdownItems}</select>
+            <input name='UpdateTransName' type='text' placeholder='update transaction name' defaultValue={transaction.name}/>
+            <input name='UpdateTransAmount' type='text' placeholder='update transaction amount' defaultValue={transaction.amount}/>
+            <input name='UpdateTransDate' type='date' placeholder='update transaction date: yyyy/mm/dd' defaultValue={transaction.date}/>
+            <select name='UpdateTransCategory' defaultValue={transaction.category.id}>{dropdownItems}</select>
             <button onClick={() => {this.updateTransactions(transaction.id)}}>Update</button>
           </form>
         </div>
