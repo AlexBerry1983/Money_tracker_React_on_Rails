@@ -6,17 +6,15 @@ class TransactionsContainer extends React.Component{
 
   constructor(props){
     super(props)
+    this.getTheTransactions = this.getTheTransactions.bind(this)
+    this.deleteTheTransaction = this.deleteTheTransaction.bind(this)
     this.state = {
       transactions: [],
       categories: []
     }
   }
 
-  refreshState(){
-    window.location.reload();
-  }
-
-  componentDidMount(){
+  getTheTransactions(){
     const url = 'http://localhost:5000/transactions'
     const request = new XMLHttpRequest()
     request.open('GET', url);
@@ -29,11 +27,28 @@ class TransactionsContainer extends React.Component{
     request.send()
   }
 
+  deleteTheTransaction(transactionId){
+    const url = 'http://localhost:5000/transactions/' + transactionId
+    const request = new XMLHttpRequest()
+    request.open('DELETE', url)
+    request.onload = () => {
+      this.getTheTransactions()
+    }
+    request.send()
+  }
+
+  componentDidMount(){
+    this.getTheTransactions()
+  }
+
   render(){
     return(
       <div>
         <h1>Transactions Summary</h1>
-        <TransactionsList transactionInfo={this.state.transactions} refresh={this.refreshState.bind(this)} cats={this.state.categories}/>
+        <TransactionsList
+          transactionInfo={this.state.transactions}
+          deleteTransaction={this.deleteTheTransaction}
+          cats={this.state.categories}/>
         <button><Link to='/'>Home</Link></button>
         <button><Link to='/CategoriesHome'>Spending Categories</Link></button>
       </div>
