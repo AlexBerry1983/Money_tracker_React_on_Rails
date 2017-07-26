@@ -59,7 +59,7 @@ class CategoriesList extends React.Component{
         updateForm =
         <div id='catUpdateForm'>
           <form ref={(reference) => this.formRef = reference}>
-            <input name='updateCatName' type='text' placeholder='update category name'/>
+            <input name='updateCatName' type='text' placeholder='update category name' defaultValue={category.name}/>
             <button onClick={() => {this.updateCategory(category.id)}}>Update</button>
           </form>
         </div>
