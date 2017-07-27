@@ -26,6 +26,7 @@ class CategoriesList extends React.Component{
     })
   }
 
+
   onUpdateCategory(catId){
     this.props.updateTheCategory(catId, this.state.updateFormInfo)
   }

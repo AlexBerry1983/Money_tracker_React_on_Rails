@@ -21,10 +21,13 @@ class TransactionsList extends React.Component{
     return parseFloat(totalSpent.toFixed(3))
   }
 
-  onDeleteTransaction(id){
-    this.props.deleteTransaction(id)
+  nukeTheItem(transactionId){
+    const url = 'http://localhost:5000/transactions/' + transactionId
+    const request = new XMLHttpRequest()
+    request.open('DELETE', url)
+    request.send()
+    this.props.refresh()
   }
-
 
   updateTransactions(transactionId){
     const updatedTransInfo = {
@@ -41,6 +44,7 @@ class TransactionsList extends React.Component{
     request.open('PUT', url)
     request.setRequestHeader('Content-Type', 'Application/json')
     request.send(jsonString)
+    this.props.refreshState()
   }
 
   createNewTransaction(event){
@@ -60,6 +64,7 @@ class TransactionsList extends React.Component{
     request.open('POST', url)
     request.setRequestHeader('Content-Type', 'application/json')
     request.send(formInfo)
+    this.props.refresh()
   }
 
   componentDidMount(props){
@@ -97,7 +102,7 @@ class TransactionsList extends React.Component{
       return (
         <div id="TransList" key={index}>
           <TransactionItem name={transaction.name} amount={transaction.amount} date={transaction.date} cat={transaction.category.name}/>
-          <button onClick={() => {this.onDeleteTransaction(transaction.id)}}>Delete</button>
+          <button onClick={() => {this.nukeTheItem(transaction.id)}}>Delete</button>
           <button id='newTransactionButton' onClick={() => {this.setState({updateTransForm: transaction.id})}}>Update</button>
           {updateTransForm}
         </div>
