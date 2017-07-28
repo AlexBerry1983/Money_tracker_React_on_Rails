@@ -21,14 +21,6 @@ class TransactionsList extends React.Component{
     return parseFloat(totalSpent.toFixed(3))
   }
 
-  nukeTheItem(transactionId){
-    const url = 'http://localhost:5000/transactions/' + transactionId
-    const request = new XMLHttpRequest()
-    request.open('DELETE', url)
-    request.send()
-    this.props.refresh()
-  }
-
   updateTransactions(transactionId){
     const updatedTransInfo = {
       transaction:{
@@ -44,28 +36,9 @@ class TransactionsList extends React.Component{
     request.open('PUT', url)
     request.setRequestHeader('Content-Type', 'Application/json')
     request.send(jsonString)
-    this.props.refreshState()
   }
 
-  createNewTransaction(event){
-    event.preventDefault()
-    let formInfo = {
-      transaction: {
-        name: this.newForm.name.value,
-        amount: this.newForm.amount.value,
-        date: this.newForm.date.value,
-        category_id: this.newForm.newCategorySelect.value
-      }
-    }
-    console.log(this.newForm.newCategorySelect.value);
-    formInfo = JSON.stringify(formInfo)
-    const url = 'http://localhost:5000/transactions'
-    const request = new XMLHttpRequest()
-    request.open('POST', url)
-    request.setRequestHeader('Content-Type', 'application/json')
-    request.send(formInfo)
-    this.props.refresh()
-  }
+
 
   componentDidMount(props){
     const url = 'http://localhost:5000/categories'
@@ -79,6 +52,10 @@ class TransactionsList extends React.Component{
       })
     }
     request.send()
+  }
+
+  onNukeTheItem(transactionId){
+    this.props.nuke(transactionId)
   }
 
   render(){
@@ -102,7 +79,7 @@ class TransactionsList extends React.Component{
       return (
         <div id="TransList" key={index}>
           <TransactionItem name={transaction.name} amount={transaction.amount} date={transaction.date} cat={transaction.category.name}/>
-          <button onClick={() => {this.nukeTheItem(transaction.id)}}>Delete</button>
+          <button onClick={() => {this.onNukeTheItem(transaction.id)}}>Delete</button>
           <button id='newTransactionButton' onClick={() => {this.setState({updateTransForm: transaction.id})}}>Update</button>
           {updateTransForm}
         </div>
@@ -113,14 +90,15 @@ class TransactionsList extends React.Component{
     })
     let showNewTranForm = null
       if (this.state.showNewTranForm === true){
+
       showNewTranForm =
         <div id="NewTransactionForm">
           <form ref={(newTform) => this.newForm = newTform}>
-            <input name="name" type='text' placeholder='transaction name'/>
+            <input name="name" type='text' placeholder='transaction name' value={this.state.name}/>
             <input name="amount" type='text' placeholder='transaction amount'/>
             <input name="date" type='date' placeholder='date: yyyy/mm/dd'/>
             <select name="newCategorySelect">{newDropDownItems}</select>
-            <button onClick={this.createNewTransaction.bind(this)}>Confirm</button>
+            <button onClick={(event) => {this.props.createNewTransaction(event, this)}}>Confirm</button>
           </form>
           <button><Link to='/transactions'>Transactions</Link></button>
           <button><Link to='/'>Home</Link></button>
