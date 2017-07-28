@@ -21,25 +21,6 @@ class TransactionsList extends React.Component{
     return parseFloat(totalSpent.toFixed(3))
   }
 
-  updateTransactions(transactionId){
-    const updatedTransInfo = {
-      transaction:{
-        name: this.formRef.UpdateTransName.value,
-        amount: this.formRef.UpdateTransAmount.value,
-        date: this.formRef.UpdateTransDate.value,
-        category_id: this.formRef.UpdateTransCategory.value
-      }
-    }
-    const jsonString = JSON.stringify(updatedTransInfo);
-    const url = 'http://localhost:5000/transactions/' + transactionId
-    const request = new XMLHttpRequest()
-    request.open('PUT', url)
-    request.setRequestHeader('Content-Type', 'Application/json')
-    request.send(jsonString)
-  }
-
-
-
   componentDidMount(props){
     const url = 'http://localhost:5000/categories'
     const request = new XMLHttpRequest()
@@ -72,7 +53,7 @@ class TransactionsList extends React.Component{
             <input name='UpdateTransAmount' type='text' placeholder='update transaction amount' defaultValue={transaction.amount}/>
             <input name='UpdateTransDate' type='date' placeholder='update transaction date: yyyy/mm/dd' defaultValue={transaction.date}/>
             <select name='UpdateTransCategory' defaultValue={transaction.category.id}>{dropdownItems}</select>
-            <button onClick={() => {this.updateTransactions(transaction.id)}}>Update</button>
+            <button onClick={() => {this.props.updateTransactions(event, transaction.id, this)}}>Update</button>
           </form>
         </div>
       }

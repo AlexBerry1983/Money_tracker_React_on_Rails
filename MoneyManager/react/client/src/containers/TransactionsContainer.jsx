@@ -11,6 +11,7 @@ class TransactionsContainer extends React.Component{
       categories: []
     }
     this.createNewTransaction = this.createNewTransaction.bind(this);
+    this.updateTransactions = this.updateTransactions.bind(this);
   }
 
   getTransactions(){
@@ -40,7 +41,32 @@ class TransactionsContainer extends React.Component{
     request.send()
   }
 
+  updateTransactions(event, transactionId, updatedTransactionForm){
+    console.log(event);
+    console.log(transactionId);
+    console.log(updateTransactionForm);
+    event.preventDefault()
+    const updatedTransInfo = {
+      transaction:{
+        name: updatedTransactionForm.formRef.UpdateTransName.value,
+        amount: updatedTransactionForm.formRef.UpdateTransAmount.value,
+        date: updatedTransactionForm.formRef.UpdateTransDate.value,
+        category_id: updatedTransactionForm.formRef.UpdateTransCategory.value
+      }
+    }
+    const jsonString = JSON.stringify(updatedTransInfo);
+    const url = 'http://localhost:5000/transactions/' + transactionId
+    const request = new XMLHttpRequest()
+    request.open('PUT', url)
+    request.setRequestHeader('Content-Type', 'Application/json')
+    request.onload = () => {
+      this.getTransactions()
+    }
+    request.send(jsonString)
+  }
+
   createNewTransaction(event, transList){
+    console.log("sending new request");
     event.preventDefault()
     const formInfo = {
       transaction: {
@@ -50,7 +76,7 @@ class TransactionsContainer extends React.Component{
         category_id: transList.newForm.newCategorySelect.value
       }
     }
-
+    console.log(formInfo);
     const jsonString = JSON.stringify(formInfo);
     const url = 'http://localhost:5000/transactions';
     const request = new XMLHttpRequest();
@@ -72,6 +98,7 @@ class TransactionsContainer extends React.Component{
           nuke={this.nukeTheItem.bind(this)}
           getApiTransactions={this.getTransactions}
           createNewTransaction={this.createNewTransaction}
+          updateTransactions={this.updateTransactions}
         />
         <button><Link to='/'>Home</Link></button>
         <button><Link to='/CategoriesHome'>Spending Categories</Link></button>
